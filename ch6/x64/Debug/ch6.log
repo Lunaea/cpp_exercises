@@ -1,0 +1,6 @@
+﻿  C++20 console application.cpp
+  calculator02buggy.cpp
+C:\Users\Andrew\source\repos\ch6\calculator02buggy.cpp(132,19): error C3861: 'term': identifier not found
+C:\Users\Andrew\source\repos\ch6\calculator02buggy.cpp(138,21): error C3861: 'term': identifier not found
+C:\Users\Andrew\source\repos\ch6\calculator02buggy.cpp(142,21): error C3861: 'term': identifier not found
+  Generating Code...
