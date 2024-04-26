@@ -7,8 +7,8 @@ constexpr int milestone2{ 1000000 };
 constexpr int milestone3{ 1000000000 };
 
 int main() {
-    int squareRice{};
-    int totalRice{};
+    double squareRice{};
+    double totalRice{};
     std::vector<bool> milestones{ false, false, false };
 
     for (int position { 1 }; position <= 64; ++position) {
