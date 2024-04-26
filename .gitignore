@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+ppp_book_practice/.vscode/settings.json
+ppp_book_practice/.vscode/tasks.json
+ppp_book_practice/ch2/ch2_drill
+ppp_book_practice/ch2/ex 6
+ppp_book_practice/ch2/ex 7
+ppp_book_practice/ch2/ex 8

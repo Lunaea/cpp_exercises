@@ -1,4 +1,6 @@
-import std;
+//import std;
+#include <iostream>
+#include <vector>
 
 int main() {
 	std::cout << "Please think of a number between 1 and 100\n";

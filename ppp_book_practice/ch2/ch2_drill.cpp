@@ -1,4 +1,9 @@
-import std;
+//import std;
+#include <iostream>
+#include <vector>
+#include <functional>
+#include <algorithm>
+#include <ranges>
 
 int main() {
 	double input{};
