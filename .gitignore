@@ -404,3 +404,6 @@ ppp_book_practice/ch2/ex 9
 *.json
 .vscode/tasks.json
 *.exe
+*.sln
+*.vcxproj
+*.vcxproj.*
