@@ -1,7 +1,16 @@
-#include "PPP.h"
+#include "../PPPheaders.h"
 
-int main() {
-    vector<int> answer{ 1, 2, 3, 4 };
+void playGame() {
+    vector<int> answer{};
+    cout << "Enter a seed integer (any number): ";
+    int n{};
+    cin >> n;
+    seed(n);
+    for (int i{0}; i < 4; ++i)
+        answer.push_back(random_int(0, 9));
+    for (int num : answer)
+        cout << num << ' ';
+    cout << '\n';
     string in{};
     int bulls{};
 
@@ -25,6 +34,17 @@ int main() {
         }
 
         cout << bulls << " bulls and " << cows << " cows\n";
+    }
+    cout << "You Win!\n";
+}
+
+int main() {
+    char cont{};
+    while (cont != 'n' && cont != 'N') {
+        playGame();
+
+        cout << "Play again? (y/n): ";
+        cin >> cont;
     }
 
     return 0;
