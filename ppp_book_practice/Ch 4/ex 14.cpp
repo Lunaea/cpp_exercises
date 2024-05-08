@@ -31,3 +31,9 @@ try {
 
     }
 }
+catch (BadDay) {
+    error("Unknown day entered\n");
+}
+catch (...) {
+    error("Unknown error occurred\n");
+}
