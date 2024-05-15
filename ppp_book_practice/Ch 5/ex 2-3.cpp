@@ -1,7 +1,6 @@
 #include "../PPPheaders.h"
 
 int factorial(int n) {
-    int x{};
     if (n < 0)
         error("Can't factorial negative number!\n");
     if (n == 0)
@@ -109,7 +108,7 @@ double termF() {
                 break;
             default:
                 ts.putback(t);
-                return (double)left;
+                return left;
         }
     }
 }
