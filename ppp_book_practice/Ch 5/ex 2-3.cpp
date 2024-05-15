@@ -99,12 +99,12 @@ double primary() {
 }
 
 double termF() {
-    int left{ (int)primary() };
+    double left{ primary() };
     Token t{ ts.get() };
     while (true) {
         switch (t.kind) {
             case '!':
-                left = factorial(left);
+                left = factorial((int)left);
                 t = ts.get();
                 break;
             default:
