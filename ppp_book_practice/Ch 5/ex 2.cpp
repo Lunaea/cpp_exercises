@@ -1,5 +1,14 @@
 #include "../PPPheaders.h"
 
+int factorial(int n) {
+    int x{};
+    if (n < 0)
+        error("Can't factorial negative number!\n");
+    if (n == 0)
+        return 1;
+    return factorial(n - 1) * n;
+}
+
 class Token {
 public:
     char kind{};
@@ -44,7 +53,7 @@ Token Token_stream::get() {
         case ';':
         case 'q':
         case '(': case ')': case '+': case '-': case '*': case '/':
-        case '{': case '}':
+        case '{': case '}': case '!':
             return Token{ ch };
         case '.':
         case '0': case '1': case '2': case '3': case '4':
