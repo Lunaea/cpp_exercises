@@ -106,7 +106,7 @@ double term() {
 }
 
 double expression() {
-    double left{ primary() };
+    double left{ term() };
     Token t{ ts.get() };
     while (true) {
         switch (t.kind) {
