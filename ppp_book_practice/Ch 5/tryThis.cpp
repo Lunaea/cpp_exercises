@@ -140,6 +140,11 @@ try {
     }
     return 0;
 }
-catch (...) {
+catch (runtime_error& e) {
+    cerr << "runtime error: " << e.what() << '\n';
     return 1;
+}
+catch (...) {
+    cerr << "Unknown error!\n";
+    return 2;
 }
