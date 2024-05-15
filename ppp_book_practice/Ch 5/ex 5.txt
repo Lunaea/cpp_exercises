@@ -1,0 +1,23 @@
+Expression:
+    Term|
+    ! Expression
+    ~ Expression
+
+Term|:
+    Term^
+    Term | Term^
+
+Term^:
+    Term&
+    Term ^ Term&
+
+Term&:
+    Primary
+    Term & Primary
+
+Primary:
+    Operand
+    ( Expression )
+
+Operand:
+    binary integer
