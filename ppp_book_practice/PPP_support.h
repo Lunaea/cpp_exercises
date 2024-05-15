@@ -22,13 +22,13 @@ namespace PPP {
 
 		T& operator[](size_t i)
 		{
-			std::cerr << "PPP::vector::[]\n";
+			//std::cerr << "PPP::vector::[]\n";
 			return this->std::vector<T>::at(i);
 		}
 
 		const T& operator[](size_t i) const
 		{
-			std::cerr << "PPP::vector::[] const\n";
+			//std::cerr << "PPP::vector::[] const\n";
 			return this->std::vector<T>::at(i);
 		}
 		//  ...
@@ -43,13 +43,13 @@ namespace PPP {
 
 		char& operator[](size_t i)
 		{
-			std::cerr << "PPP::string::[]\n";
+			//std::cerr << "PPP::string::[]\n";
 			return this->std::string::at(i);
 		}
 
 		const char& operator[](size_t i) const
 		{
-			std::cerr << "PPP::string::[] const\n";
+			//std::cerr << "PPP::string::[] const\n";
 			return this->std::string::at(i);
 		}
 		// ... 
