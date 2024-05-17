@@ -5,7 +5,11 @@ constexpr char quit = 'q';
 constexpr char print = ';';
 constexpr char name = 'a';
 constexpr char let = 'L';
+constexpr char root = 'r';
+constexpr char exponent = 'e';
 const string declkey = "let";
+const string square = "sqrt";
+const string power = "pow";
 const string prompt = "> ";
 const string result = "= ";
 
@@ -130,6 +134,10 @@ Token Token_stream::get() {
                 cin.putback(ch);
                 if (s == declkey)
                     return Token{ let };
+                if (s == square)
+                    return Token{ root };
+                if (s == power)
+                    return Token{ exponent };
                 return Token{ name, s };
             }
             error("Bad token!\n");
@@ -176,6 +184,17 @@ double primary() {
         default:
             error("Primary expected!\n");
     }
+}
+
+double square_root() {
+    Token t{ ts.get() };
+    if (t.kind != '(')
+        error("expected '(' after ", square);
+    double d = primary();
+    Token t2{ ts.get() };
+    if (t2.kind != ')')
+        error("expected ')' to complete ", square);
+    return sqrt(d);
 }
 
 double term() {
@@ -237,6 +256,10 @@ double statement() {
     switch (t.kind) {
         case let:
             return declaration();
+        case exponent:
+            return 2.1;
+        case root:
+            return square_root();
         default:
             ts.putback(t);
             return expression();
@@ -269,6 +292,7 @@ int main()
 try {
     define_name("pi", 3.14159);
     define_name("e", 2.71828);
+    define_name("k", 1000);
     calculate();
     return 0;
 }
