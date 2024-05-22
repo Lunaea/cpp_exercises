@@ -115,6 +115,7 @@ Token Token_stream::get() {
         case '/': 
         case '%':
         case '=':
+        case ',':
             return Token{ ch };
         case '.':
         case '0': case '1': case '2': case '3': case '4':
@@ -140,7 +141,7 @@ Token Token_stream::get() {
                     return Token{ exponent };
                 return Token{ name, s };
             }
-            error("Bad token!\n");
+            error("Bad token!");
     }
 }
 
@@ -215,13 +216,19 @@ double power() {
         error("0^0 is indeterminant");
     if (p == 0)
         return 1.0;
-    double result{ b };
+    bool inverse{ false };
+    if (p < 0) {
+        inverse = true;
+        p *= -1;
+    }
+    double result{ 1.0 };
     for (int i{ 0 }; i < p; ++i)
         result *= b;
-    if (p < 0)
+    if (inverse)
         return 1 / result;
     return result;
 }
+
 double term() {
     double left{ primary() };
     Token t{ ts.get() };
@@ -282,7 +289,7 @@ double statement() {
         case let:
             return declaration();
         case exponent:
-            return 2.1;
+            return power();
         case root:
             return square_root();
         default:
