@@ -8,8 +8,8 @@ constexpr char let = 'L';
 constexpr char root = 'r';
 constexpr char exponent = 'e';
 const string declkey = "let";
-const string square = "sqrt";
-const string power = "pow";
+const string sqrtkey = "sqrt";
+const string powkey = "pow";
 const string prompt = "> ";
 const string result = "= ";
 
@@ -134,9 +134,9 @@ Token Token_stream::get() {
                 cin.putback(ch);
                 if (s == declkey)
                     return Token{ let };
-                if (s == square)
+                if (s == sqrtkey)
                     return Token{ root };
-                if (s == power)
+                if (s == powkey)
                     return Token{ exponent };
                 return Token{ name, s };
             }
@@ -189,14 +189,39 @@ double primary() {
 double square_root() {
     Token t{ ts.get() };
     if (t.kind != '(')
-        error("expected '(' after ", square);
-    double d = primary();
+        error("expected '(' after ", sqrtkey);
+    double d = expression();
+    if (d < 0)
+        error("Can't provide complex numbers");
     Token t2{ ts.get() };
     if (t2.kind != ')')
-        error("expected ')' to complete ", square);
+        error("expected ')' to complete ", sqrtkey);
     return sqrt(d);
 }
 
+double power() {
+    Token t{ ts.get() };
+    if (t.kind != '(')
+        error("expected '(' after ", powkey);
+    double b = expression();
+    Token t2{ ts.get() };
+    if (t2.kind != ',')
+        error("expected ',' after base");
+    int p = narrow<int>(expression());
+    Token t3{ ts.get() };
+    if (t3.kind != ')')
+        error("expected ')' to complete ", powkey);
+    if (b == 0 && p == 0)
+        error("0^0 is indeterminant");
+    if (p == 0)
+        return 1.0;
+    double result{ b };
+    for (int i{ 0 }; i < p; ++i)
+        result *= b;
+    if (p < 0)
+        return 1 / result;
+    return result;
+}
 double term() {
     double left{ primary() };
     Token t{ ts.get() };
