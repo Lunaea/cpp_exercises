@@ -46,8 +46,10 @@ bool is_declared(string var) {
 }
 
 double define_name(string var, double val) {
-    if (is_declared(var))
-        error(var," declared twice");
+    if (is_declared(var)) {
+        set_value(var, val);
+        return val;
+    }
     var_table.push_back(Variable{var,val});
     return val;
 }
@@ -130,7 +132,7 @@ Token Token_stream::get() {
             if (isalpha(ch)) {
                 string s;
                 s += ch;
-                while (cin.get(ch) && (isalpha(ch) || isdigit(ch)))
+                while (cin.get(ch) && (isalpha(ch) || isdigit(ch) || ch == '_'))
                     s += ch;
                 cin.putback(ch);
                 if (s == declkey)
