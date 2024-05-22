@@ -7,9 +7,11 @@ constexpr char name = 'a';
 constexpr char let = 'L';
 constexpr char root = 'r';
 constexpr char exponent = 'e';
+constexpr char con = 'C';
 const string declkey = "let";
 const string sqrtkey = "sqrt";
 const string powkey = "pow";
+const string constkey = "const";
 const string prompt = "> ";
 const string result = "= ";
 
@@ -17,7 +19,9 @@ class Variable {
     public:
         string name{};
         double value{};
+        bool constant{ false };
         Variable(string n, double x) : name{ n }, value{ x } {}
+        Variable(string n, double x, bool c) : name{ n }, value{ x }, constant{ c } {}
 };
 
 vector<Variable> var_table{};
@@ -29,10 +33,13 @@ double get_value(string s) {
     error("Reading undefined variable ", s);
 }
 
-void set_value(string s, double d) {
+void set_value(string s, double d, bool c) {
     for (Variable& v : var_table)
         if (v.name == s) {
+            if (v.constant)
+                error(v.name, " is a constant!");
             v.value = d;
+            v.constant = c;
             return;
         }
     error("Writing undefined variable ", s);
@@ -45,12 +52,12 @@ bool is_declared(string var) {
     return false;
 }
 
-double define_name(string var, double val) {
+double define_name(string var, double val, bool c) {
     if (is_declared(var)) {
-        set_value(var, val);
+        set_value(var, val, c);
         return val;
     }
-    var_table.push_back(Variable{var,val});
+    var_table.push_back(Variable{var,val,c});
     return val;
 }
 
@@ -141,6 +148,8 @@ Token Token_stream::get() {
                     return Token{ root };
                 if (s == powkey)
                     return Token{ exponent };
+                if (s == constkey)
+                    return Token{ con };
                 return Token{ name, s };
             }
             error("Bad token!");
@@ -152,6 +161,13 @@ Token_stream ts;
 double expression();
 
 double declaration() {
+    bool constant{ false };
+    Token c{ ts.get() };
+    if (c.kind == con)
+        constant = true;
+    else
+        ts.putback(c);
+
     Token t{ ts.get() };
     if (t.kind != name)
         error("Name expected in declaration!\n");
@@ -161,7 +177,7 @@ double declaration() {
         error("= missing in declaration of ", t.name);
     
     double d = expression();
-    define_name(t.name, d);
+    define_name(t.name, d, constant);
     return d;
 }
 
@@ -324,9 +340,9 @@ void calculate() {
 
 int main() 
 try {
-    define_name("pi", 3.14159);
-    define_name("e", 2.71828);
-    define_name("k", 1000);
+    define_name("pi", 3.14159, true);
+    define_name("e", 2.71828, true);
+    define_name("k", 1000, true);
     calculate();
     return 0;
 }
