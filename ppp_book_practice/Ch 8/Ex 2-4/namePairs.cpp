@@ -41,3 +41,21 @@ void NamePairs::sort() {
 
     ages = agesSorted;
 }
+
+std::ostream& operator<<(std::ostream& o, const NamePairs& a) {
+    const std::vector<std::string>& names{ a.getNames() };
+    const std::vector<double>& ages{ a.getAges() };
+    
+    for (int i = 0; i < names.size(); ++i)
+        o << '(' << names[i] << ", " << ages[i] << ")\n";
+
+    return o;
+}
+
+bool operator==(const NamePairs& a, const NamePairs& b) {
+    return (a.getNames() == b.getNames()) && (a.getAges() == b.getAges());
+}
+
+bool operator!=(const NamePairs& a, const NamePairs& b) {
+    return !(a == b);
+}
