@@ -15,7 +15,7 @@ try {
     std::getline(std::cin >> std::ws, title);
     std::getline(std::cin >> std::ws, author);
 
-    Book test{ isbn, title, author, copy, true };
+    Book test{ isbn, title, author, Genre::nonfiction, copy, true };
     std::cout << test << copy << '\n';
 }
 catch (...)
