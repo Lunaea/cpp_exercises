@@ -32,6 +32,7 @@ public:
     void checkOut();
     bool isValid() const;
 
+    Book() {}
     Book(std::string i, std::string t, std::string a, Genre g, Date d, bool s)
         : isbn{ i }, title{ t }, author{ a }, genre{ g }, copyright{ d }, status{ s }
     {
