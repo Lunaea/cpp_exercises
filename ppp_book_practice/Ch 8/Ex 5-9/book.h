@@ -35,4 +35,7 @@ private:
 };
 
 std::ostream& operator<<(std::ostream& o, const Book& a);
+bool operator==(const Book& a, const Book& b);
+bool operator!=(const Book& a, const Book& b);
+
 #endif
