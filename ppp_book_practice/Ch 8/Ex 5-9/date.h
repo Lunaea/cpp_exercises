@@ -56,4 +56,13 @@ private:
 const std::vector<std::string_view> monthTable{ "NA", "January", "February", "March", "April", "May", "June",
                                                 "July", "August", "September", "October", "November", "December" };
 
+Month operator++(Month& m);
+Month operator--(Month& m);
+Month operator+(Month& m, int n);
+Month operator+=(Month& m, int n);
+Year operator+(Year& y, int n);
+Year operator+=(Year& y, int n);
+std::ostream& operator<<(std::ostream& o, const Month& m);
+std::ostream& operator<<(std::ostream& o, const Year& y);
+std::ostream& operator<<(std::ostream& o, const Date& d);
 #endif

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string_view>
 #include "date.h"
 
 Month operator++(Month& m) {
@@ -39,15 +40,15 @@ Year operator+=(Year& y, int n) {
     return Year{ y.y };
 }
 
-std::ostream& operator<<(std::ostream& o, Month m) {
+std::ostream& operator<<(std::ostream& o, const Month& m) {
     return o << monthTable[(int)m];
 }
 
-std::ostream& operator<<(std::ostream& o, Year y) {
+std::ostream& operator<<(std::ostream& o, const Year& y) {
     return o << y.y;
 }
 
-std::ostream& operator<<(std::ostream& o, Date d) {
+std::ostream& operator<<(std::ostream& o, const Date& d) {
     return o << d.getMonth() << '/' << d.getDay() << '/' << d.getYear();
 }
 
