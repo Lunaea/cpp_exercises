@@ -8,6 +8,8 @@
 class Book {
 public:
     class InvalidBook {};
+    class InvalidOut {};
+    class InvalidIn {};
 
     std::string getIsbn() const { return isbn; }
     std::string getTitle() const { return title; }
@@ -31,4 +33,6 @@ private:
     Date copyright{};
     bool status{ true };
 };
+
+std::ostream& operator<<(std::ostream& o, const Book& a);
 #endif
