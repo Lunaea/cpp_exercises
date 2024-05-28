@@ -56,6 +56,7 @@ private:
 const std::vector<std::string_view> monthTable{ "NA", "January", "February", "March", "April", "May", "June",
                                                 "July", "August", "September", "October", "November", "December" };
 
+bool leapyear(int x);
 Month operator++(Month& m);
 Month operator--(Month& m);
 Month operator+(Month& m, int n);

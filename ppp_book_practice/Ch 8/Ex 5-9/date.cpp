@@ -78,3 +78,7 @@ void Date::addYear(int n) {
 bool Date::isValid() const {
     return (0 < d && d <= 31) && (0 < static_cast<int>(m) && static_cast<int>(m) <= 12);
 }
+
+bool leapyear(int x) {
+    return (x % 4 == 0) && !(x % 100 == 0);
+}
