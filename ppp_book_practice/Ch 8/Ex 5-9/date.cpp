@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string_view>
+#include <cmath>
 #include "date.h"
 
 Month operator++(Month& m) {
@@ -81,4 +82,38 @@ bool Date::isValid() const {
 
 bool leapyear(int x) {
     return (x % 4 == 0) && !(x % 100 == 0);
+}
+
+int daysSinceFirst(const Date& d) {
+    int days{};
+
+    days += (((int)d.getMonth() - 1) * 31) + d.getDay();
+
+    return days;
+}
+
+int weekNum(const Date& d) {
+    return std::ceil(daysSinceFirst(d) / 7.0);
+}
+
+Date nextWorkday(const Date& d) {
+    Date next{ d };
+    int days{ daysSinceFirst(d) };
+
+    switch (days % 7) {
+    case 0: case 1: case 2: case 3: case 4:
+        next.addDay(1);
+        return next;
+    case 5:
+        next.addDay(3);
+        return next;
+    case 6:
+        next.addDay(2);
+        return next;
+    default:
+        std::cerr << "How??\n";
+        throw;
+    }
+    
+    return next;
 }

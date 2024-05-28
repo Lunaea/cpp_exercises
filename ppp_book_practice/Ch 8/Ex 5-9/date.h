@@ -57,6 +57,9 @@ const std::vector<std::string_view> monthTable{ "NA", "January", "February", "Ma
                                                 "July", "August", "September", "October", "November", "December" };
 
 bool leapyear(int x);
+Date nextWorkday(const Date& d);
+int daysSinceFirst(const Date& d);
+int weekNum(const Date& d);
 Month operator++(Month& m);
 Month operator--(Month& m);
 Month operator+(Month& m, int n);
