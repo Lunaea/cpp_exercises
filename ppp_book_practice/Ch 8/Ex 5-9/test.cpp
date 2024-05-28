@@ -1,10 +1,13 @@
 #include "book.h"
 #include "date.h"
+#include "patron.h"
+#include "library.h"
 #include <iostream>
 #include <string>
 
 int main() 
 try {
+    Library lib{};
     std::string author{};
     std::string title{};
     std::string isbn{};
@@ -16,7 +19,9 @@ try {
     std::getline(std::cin >> std::ws, author);
 
     Book test{ isbn, title, author, Genre::nonfiction, copy, true };
-    std::cout << test << copy << '\n';
+    lib.addBook(test);
+    lib.addPatron({ "Felix", 7878, 0 });
+    std::cout << "okay" << '\n';
 }
 catch (...)
 {
