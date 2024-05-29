@@ -76,8 +76,24 @@ void Date::addYear(int n) {
     y += n;
 }
 
+void Date::addMonth(long n) {
+    days += n * 31;
+}
+
+void Date::addDay(long n) {
+    days += n;
+}
+
+void Date::addYear(long n) {
+    days += n * 365;
+}
+
 bool Date::isValid() const {
     return (0 < d && d <= 31) && (0 < static_cast<int>(m) && static_cast<int>(m) <= 12);
+}
+
+bool Date::isValidDays() const {
+    return days >= 0;
 }
 
 bool leapyear(int x) {
@@ -87,7 +103,7 @@ bool leapyear(int x) {
 int daysSinceFirst(const Date& d) {
     int days{};
 
-    days += (((int)d.getMonth() - 1) * 31) + d.getDay();
+    days += (((int)d.getMonth() - 1) * 31) + d.getDay() - 1;
 
     return days;
 }

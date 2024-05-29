@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string_view>
+#include <cmath>
 
 enum class Month {
     jan = 1,
@@ -29,18 +30,37 @@ public:
     Year getYear() const { return y; }
     Month getMonth() const { return m; }
     int getDay() const { return d; }
+    long getDays() const { return days; }
 
     void setYear(Year yy) { y = yy; }
     void setMonth(Month mm) { m = mm; }
     void setDay(int dd) { d = dd; }
+    void setDays(long dd) { days = dd; }
 
     void addDay(int n);
     void addMonth(int n);
     void addYear(int n);
+    void addDay(long n);
+    void addMonth(long n);
+    void addYear(long n);
 
     bool isValid() const;
+    bool isValidDays() const;
 
     Date() {}
+    Date(long dd): days{ dd }
+    {
+        if (!isValidDays())
+            throw InvalidDate{};
+
+        y.y += dd / 365;
+
+        if (static_cast<int>(std::ceil((dd % 365) / 31.0)) == 0)
+            m = Month::jan;
+        else
+            m = Month{ static_cast<int>(std::ceil((dd % 365) / 31.0)) };
+        d += (dd % 365) % 31;
+    }
     Date(Year yy, Month mm, int dd): y{ yy }, m{ mm }, d{ dd }
     {
         if (!isValid())
@@ -48,9 +68,10 @@ public:
     }
 
 private:
-    Year y{ 1900 };
+    Year y{ 1970 };
     Month m{ Month::jan };
     int d{ 1 };
+    long days{};
 };
 
 const std::vector<std::string_view> monthTable{ "NA", "January", "February", "March", "April", "May", "June",

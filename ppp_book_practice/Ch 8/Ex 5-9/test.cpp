@@ -11,10 +11,10 @@ try {
     std::string author{};
     std::string title{};
     std::string isbn{};
-    Date copy{ Year{ 2024 }, Month::may, 31 };
+    Date copy{ 0 };
 
     std::cout << "Week no. " << weekNum(copy) << '\n';
-    std::cout << "Next work day: " << nextWorkday(copy) << '\n';
+    std::cout << "Next work day: " << nextWorkday(copy) << '\n' << copy;
 
     std::cout << "isbn, title, author, date: ";
     std::getline(std::cin >> std::ws, isbn);
