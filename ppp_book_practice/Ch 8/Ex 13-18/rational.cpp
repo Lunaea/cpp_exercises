@@ -42,6 +42,16 @@ std::ostream& operator<<(std::ostream& o, const Rational& a) {
     return o << a.numerator << '/' << a.denominator;
 }
 
+Rational Rational::operator=(const Rational& a) {
+    if (this == &a)
+        return *this;
+
+    this -> numerator = a.numerator;
+    this -> denominator = a.denominator;
+
+    return *this;
+}
+
 double toDouble(const Rational& a) {
     return (double)a.getNumerator() / a.getDenominator();
 }
