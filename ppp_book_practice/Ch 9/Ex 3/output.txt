@@ -1,0 +1,46 @@
+#ncld <strm>
+#ncld <strng>
+#ncld <vctr>
+#ncld <fstrm>
+
+cnst std::vctr<chr> vwls{ '', '', '', '', '' };
+
+bl svwl(chr c) {
+    chr x = tlwr(c);
+
+    fr (chr v : vwls)
+        f (x == v)
+            rtrn tr;
+
+    rtrn fls;
+}
+
+nt mn() {
+    std::strng nm{};
+    std::ct << "Pls ntr  fl nm: ";
+    std::gtln(std::cn, nm);
+
+    std::fstrm fs{nm};
+    f(!fs)
+        thrw std::rntm_rrr("nbl t pn fl " + nm);
+
+    std::fstrm fs{"tpt.txt"};
+
+    std::vctr<std::strng> lns{};
+    fr (std::strng ln; std::gtln(fs, ln);)
+        lns.psh_bck(ln);
+
+    fr (nt  = 0;  < lns.sz(); ++) {
+        fr (nt j = 0; j < lns[].sz(); ++j) {
+            f (svwl(lns[][j])) {
+                lns[].rs(j, 1);
+                --j;    //dcrmnt j t ccnt fr nw rmvd vwl
+            }
+        }
+    }
+
+    fr (t ln : lns)
+        fs << ln << '\n';
+
+    rtrn 0;
+}
